@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,6 +17,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try{
+            PrintStream zapisi = new PrintStream(openFileOutput("recnikk.txt", MODE_PRIVATE));
+            zapisi.println("sample, пример");
+            zapisi.println("morning, утро");
+            zapisi.println("hello, здраво");
+            zapisi.println("trousers, пантолони");
+            zapisi.println("father, татко");
+            zapisi.println("desk, маса");
+            zapisi.println("chair, столица");
+            zapisi.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void Klik(View view) {
@@ -26,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
         if(definicija!=null)
             tekstt.setText(definicija);
-            else
-                tekstt.setText("Ne e pronajden takov zbor vo recnikot");
+        else
+            tekstt.setText("Ne e pronajden takov zbor vo recnikot");
     }
 
     private String Pronajdi(String text) {
-        InputStream input = getResources().openRawResource(R.raw.recnik);
+        InputStream input = getResources().openRawResource(R.raw.recnikk);
         Scanner scan = new Scanner(input);
 
         while(scan.hasNext()){
@@ -45,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 }
+
+
+
+
 
 
 
